@@ -1,0 +1,318 @@
+<div class="container">
+  <!-- columns for order details -->
+  <div class="row">
+    <div class="col text-center">
+
+      <div style="min-height: 30em;" *ngIf="fetching">
+        <app-loader></app-loader>
+      </div>
+
+      <div *ngIf="!fetching && orders.length === 0 && activeorders.length === 0" style="min-height: 15em; margin: 5em 0 8em 0">
+        <h4>You have not placed any orders yet.</h4>
+      </div>
+
+      <div *ngFor="let item of activeorders">
+
+        <div class="text-center" style="color: #c4224c;">
+          <br>
+          <h2>Active Order</h2>
+        </div>
+        <br>
+
+<!-- when No Delivery boy is assigned to user, following code will be shown -->
+        <div class="col-md-6" *ngIf="!fetching && activeorders && !item.delivery_boy">
+
+          <ul class="price">
+            <li class="header" style="border-radius: 8px 8px 0px 0px;">Order Id:{{item.order_special_id}}</li>
+            <li class="grey">{{item.order_date | date : "dd.MM.y / hh:mm:ss a"}}</li>
+            <li><b style="color: #c4224c"> Item/s: {{item.items.length}} </b></li>
+            <!--  <li *ngFor = "let i of order.items">Item/s: {{i.product.name}} x {{i.quantity}}</li>    -->
+            <li><b style="color: black;"> Total: ₹{{item.total_price}}/- </b></li>
+            <li><b style="color: green;"> Status: {{(item.order_completed)? 'Completed' : (item.order_cancelled)? 'Cancelled' :'Processing'}} </b></li>
+
+            <div class="grey">
+              <li>
+                <div class="btn-group">
+                  <button *ngIf="!item.order_completed && !item.order_cancelled" class="button btn" style="border-radius: 8px;" type="button"
+                    data-toggle="modal" data-target="#myModal" (click)="setOrderId(order._id)">Cancel Order?</button>
+                  <button *ngIf="!item.order_completed && !item.order_cancelled" class="button btn" style="border-radius: 8px;" (click)="selectedOrderId = item.order_special_id; selectedUserMob = item.mobile; selectedUserName = item.delivery_address.first_name;"
+                    type="button" data-toggle="modal" data-target="#myModal2">Need Help?</button>
+                  <button *ngIf="(item.order_completed || item.order_cancelled)" class="button btn" style="border-radius: 8px;" (click)="selectedOrderId = item.order_special_id; selectedUserMob = item.mobile; selectedUserName = item.delivery_address.first_name;"
+                    data-toggle="modal" data-target="#myModal2">Need Help?</button>
+                </div>
+              </li>
+            </div>
+
+            <li class="header" style="border-radius: 0px 0px 8px 8px;" (click)="selectedOrderId = item.order_special_id; selectedOrderTotal = item.total_price; selecteditems = item.items"
+              data-toggle="modal" data-target="#myModal3">
+              Order Details
+            </li>
+
+          </ul>
+
+        </div>
+
+ <!-- when Delivery boy will be asssigned to user, following code will be shown -->
+        <div class="col-lg-6 col-md-12 col-sm-12" style="float:none;margin:auto;" *ngIf="!fetching && activeorders && item.delivery_boy">
+
+            <ul class="price">
+
+              <li class="header" style="border-radius: 8px 8px 0px 0px;">Order Id:{{item.order_special_id}}</li>
+              <li class="grey" *ngIf="item.status_note" style="color: #c4224c;">"{{item.status_note}}"</li>
+              <li class="grey" *ngIf="!item.status_note" style="color: gray;">"Estimated Delivery within 30 to 60 minutes of placing order"</li>
+
+              <div class="row">  
+
+                <div class="col-sm-4">  
+                  <li> <b style="color: #c4224c;">Item/s: {{item.items.length}} </b></li>
+                </div>
+
+              <!-- <li *ngFor = "let i of order.items">Item/s: {{i.product.name}} x {{i.quantity}}</li>    -->
+                <div class="col-sm-4">
+                  <li> <b>Total: ₹{{item.total_price}}/- </b></li>
+                </div>
+
+                <div class="col-sm-4"> 
+                  <li> <b style="color: green;">Status: {{(item.order_completed)? 'Completed' : (item.order_cancelled)? 'Cancelled' :'Processing'}} </b></li>
+                </div>
+
+            </div>
+
+
+              <div class="grey">
+                  <li>
+                    <div class="row">
+                      <div class="col-sm-6" style="padding: 0px 15px 0px 15px ; margin-top: 14px;" *ngIf="item.delivery_boy">
+                          <img class="img-fluid" src="{{item.delivery_boy.photo}}" height="140px" width="140px">
+                      </div>
+                      <div class="col-sm-6" style="padding: 0px 15px 0px 15px;"> 
+
+                          <p> <b style="font-size: 14px;">Delivery By:</b> <br> {{item.delivery_boy.name}} ({{item.delivery_boy.mobile}})</p>
+                          <p style="font-size: 12px;"><b>Description:</b> {{item.delivery_boy.description}}</p>
+
+                          <div class="col-md-12">
+                              <div class="btn-group">
+                                  <button *ngIf="!item.order_completed && !item.order_cancelled" class="button btn" style="border-radius: 8px;" type="button"
+                                    data-toggle="modal" data-target="#myModal" (click)="setOrderId(order._id)">Cancel Order?</button>
+                                  <button *ngIf="!item.order_completed && !item.order_cancelled" class="button btn" style="border-radius: 8px;" (click)="selectedOrderId = item.order_special_id; selectedUserMob = item.mobile; selectedUserName = item.delivery_address.first_name;"
+                                    type="button" data-toggle="modal" data-target="#myModal2">Need Help?</button>
+                                  <button *ngIf="(item.order_completed || item.order_cancelled)" class="button btn" style="border-radius: 8px;" (click)="selectedOrderId = item.order_special_id; selectedUserMob = item.mobile; selectedUserName = item.delivery_address.first_name;"
+                                    data-toggle="modal" data-target="#myModal2">Need Help?</button>
+                              </div>
+                          </div>
+
+                      </div>
+
+                    </div>
+                  </li>
+              </div>
+  
+              <!-- <div class="grey">
+                <li>
+
+                </li>
+              </div> -->
+  
+              <li class="header" style="border-radius: 0px 0px 8px 8px;" (click)="selectedOrderId = item.order_special_id; selectedOrderTotal = item.total_price; selecteditems = item.items"
+                data-toggle="modal" data-target="#myModal3">
+                Order Details
+              </li>
+  
+            </ul>
+  
+          </div>
+      </div>
+
+
+      <div id="hidebtn" *ngIf="allorderbit">
+        <div class="text-center" style="color: #c4224c;">
+          <br>
+          <h2>My Orders</h2>
+        </div>
+
+        <div class="columns" *ngFor="let order of orders | slice:0:12; let i=index">
+
+          <ul class="price">
+            <li class="header" style="border-radius: 8px 8px 0px 0px;">Order Id:{{order.order_special_id}}</li>
+            <li class="grey">{{order.order_date | date : "dd.MM.y / hh:mm:ss a"}}</li>
+            <li>Item/s: {{order.items.length}}</li>
+            <!-- <li *ngFor = "let i of order.items">Item/s: {{i.product.name}} x {{i.quantity}}</li>    -->
+            <li>Total: ₹{{order.total_price}}/-</li>
+            <li>Status: {{(order.order_completed)? 'Completed' : (order.order_cancelled)? 'Cancelled' :'Processing'}}</li>
+
+            <div class="grey">
+              <li>
+                <div class="btn-group">
+                  <button *ngIf="!order.order_completed && !order.order_cancelled" class="button btn" style="border-radius: 8px;" type="button"
+                    data-toggle="modal" data-target="#myModal" (click)="setOrderId(order._id)">Cancel Order?</button>
+                  <button *ngIf="!order.order_completed && !order.order_cancelled" class="button btn" style="border-radius: 8px;" (click)="selectedOrderId = order.order_special_id; selectedUserMob = order.mobile; selectedUserName = order.delivery_address.first_name;"
+                    type="button" data-toggle="modal" data-target="#myModal2">Need Help?</button>
+                  <button *ngIf="(order.order_completed || order.order_cancelled)" class="button btn" style="border-radius: 8px;" (click)="selectedOrderId = order.order_special_id; selectedUserMob = order.mobile; selectedUserName = order.delivery_address.first_name;"
+                    data-toggle="modal" data-target="#myModal2">Need Help?</button>
+                </div>
+              </li>
+            </div>
+
+            <li class="header" style="border-radius: 0px 0px 8px 8px;" (click)="selectedOrderId = order.order_special_id; selectedOrderTotal = order.total_price; selecteditems = order.items"
+              data-toggle="modal" data-target="#myModal3">
+              Order Details
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- The Modal for Order Details -->
+    <div class="modal fade" id="myModal3">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Order Details</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+
+            <ul class="price">
+              <li class="header" style="border-radius: 8px 8px 0px 0px;">Order Id:{{selectedOrderId}}</li>
+              <li class="grey" *ngFor="let i of selecteditems">{{i.product.name}} x {{i.quantity}}</li>
+              <li class="header" style="border-radius: 0px 0px 8px 8px; font-size: 20px;">Total: ₹{{selectedOrderTotal}}</li>
+            </ul>
+
+            <p style="font-size: 14px;">NOTE: The order can only be valid for cancellation if cancellation request has been placed under 30 minutes after
+              placing order.</p>
+            <p style="font-size: 14px;">Thanks, Team GlobalPallet</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- The Modal for ORder CANcellation -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Cancel Order?</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <p>Select Reason:- </p>
+
+            <form [formGroup]="couponForm">
+              <select class="custom-select d-block w-100" class="form-control" required formControlName="cancelreasons" style="padding: 8px;"
+                id="state" required="">
+                <option value="" hidden>Cancel Order</option>
+
+                <ng-container *ngFor="let it of cancelreason">
+                  <option>{{it.key}}</option>
+                </ng-container>
+
+              </select>
+            </form>
+
+            <p>In case you want to cancel order, then press cancel order button below, or if you have any query then please
+              feel free to contact us at 647XXXXXX.</p>
+            <p>NOTE: The order can only be valid for cancellation if cancellation request has been placed under 40 minutes after
+              placing order.</p>
+            <p>Thanks, Team GlobalPallet</p>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer" style="justify-content: center;">
+            <button type="button" style="background-color: #c4224c; border-radius: 8px;" class="btn btn-secondary" data-dismiss="modal" (click)="cancelOrder()">Cancel Order?</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- The Modal for HELP -->
+    <div class="modal fade" id="myModal2">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">HELP !!</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form [formGroup]="createForm" class="create-form">
+              <input type="email" id="Order_id" placeholder="Email ID (Optional)" required #Order_id>
+              <input type="text" id="name" disabled placeholder="Your Name.." value="{{selectedUserName}}" required #name>
+              <input type="text" id="mobile" disabled value="{{selectedUserMob}}" placeholder="Mobile Number" required #mobile>
+              <input type="text" disabled id="subject" placeholder="Subject" value="Issue Related To OrderId: {{selectedOrderId}}" required
+                #subject>
+              <textarea id="subject" name="subject" placeholder="Write Comments.." style="height:200px" required #comment></textarea>
+
+              <input type="submit" value="Submit" style="background-color: #c4224c; border-radius: 8px; padding: 8px 16px;" data-dismiss="modal" (click)="addIssues(Order_id.value, subject.value, name.value, mobile.value, comment.value)">
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Cancel ErrorModal -->
+    <div class="modal fade" id="cancelError">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">{{error? 'Error':'Success'}}</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <p>{{errorMsg}}</p>
+
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer" style="justify-content: center;">
+            <button type="button" style="background-color: #c4224c;" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="roww" *ngIf = "hidebutton" style="text-align: center; padding: 0px 0px 20px 0px;">
+  <div class="btn-group">
+    <button class="button btn" style="border-radius: 8px; font-size: 18px;" (click)="onAllOrders()">See All Orders</button>
+  </div>
+</div>
+
+<div class="roww" id="hidebtnn" *ngIf = "!hidebutton" style="text-align: center; padding: 0px 0px 20px 0px;">
+  <div class="btn-group">
+    <button class="button btn" style="border-radius: 8px; font-size: 18px;" (click)="onHide()">Hide All Orders</button>
+  </div>
+</div>
+
+<div class="roww">
+  <div class="col-sm-12">
+    <div id="snackbar">Sent Successfully</div>
+  </div>
+</div>

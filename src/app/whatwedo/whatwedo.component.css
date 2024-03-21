@@ -1,0 +1,41 @@
+.row {
+  color: whitesmoke
+}
+
+.container-fluid {
+padding-top: 5px;
+background-color: #ffffff;
+} 
+
+h4 {
+  font-size: 14px;
+  line-height: 1.375em;
+  color: #303030;
+  font-weight: 400;
+  /* margin: 0 15px 0 15px; */
+  margin-bottom: 5px;
+} 
+
+/* p {
+  line-height: 1.8;
+  color: #818181;
+} */
+
+.logo-small {
+  color: gray;
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  /* font-weight: bold; */
+  /* text-transform: uppercase; */
+  color: #c4224c;
+  margin-bottom: 15px;
+}
+
+/* @media (max-width: 412px) {
+  .bla {
+    display: none; 
+  }
+} */

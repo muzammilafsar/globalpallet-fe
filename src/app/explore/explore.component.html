@@ -1,0 +1,15 @@
+<div *ngIf="loading" class="container-fluid" style="background-color: white; padding: 15px;">
+        <div class="scrollmenu image-container">
+            <p class="text-center" style="font-size: 25px; color: grey">“One cannot think well, love well, sleep well, if one has not dined well.”
+                    ― Virginia Woolf, A Room of One's Own</p>
+        </div>
+</div>
+
+<div *ngIf="!loading" class="container-fluid" style="background-color: black; padding: 15px;"> 
+<div class="scrollmenu image-container">
+    <ng-container *ngFor="let i of explore; let i = index">
+     <img class="divv" *ngIf="i.image !== ''" [ngClass]="{'active' : i == 0}" routerLink = "/explore" [queryParams]="{explore: i?.detail?.tag}" src="{{ i?.image }}" alt="" >
+    </ng-container>
+</div>
+</div>
+

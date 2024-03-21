@@ -1,0 +1,110 @@
+<div class="container-fluid">
+
+
+    <!-- Hot Offers part -->
+    <div class="row">
+            <div class="col">
+    
+                <div class="text-center" style="color: #c4224c;">
+                    <h2>HOT OFFERS</h2>
+                </div>
+    
+                <div style="min-height: 15em; margin: 1em" *ngIf="fetching">
+                    <app-loader></app-loader>
+                </div>
+    
+                <div class="row" *ngIf="!fetching">
+    
+                    <ng-container *ngFor="let i of offers">
+                        <div class="col" *ngIf="i.enabled && !i.goldMember">
+    
+                            <div class="coupon">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+    
+                                        <div class="flip-card-front">
+                                            <img class="img-fluid" src='{{i.image}}' alt="" style="display: block; border-radius: 10px;">
+                                        </div>
+    
+                                        <div class="flip-card-back">
+    
+                                            <div class="dotted" id="p1" (click)="copyText(i.coupon_code)">
+                                                <h2 style="margin-bottom: 0; cursor: pointer;" data-toggle="tooltip" data-placement="auto" title="Copy To Clipboard">{{i.coupon_code}}</h2>
+                                            </div>
+    
+                                            <p style="margin-bottom: 0px; font-size: 18px;">{{i.title}}</p>
+                                            <p style="margin-bottom: 0px;">{{i.subtitle}}</p>
+                                            <p style="margin-bottom: 0px; text-align: right; padding-right: 10px; font-size: 12px;"> *T & C</p>
+                                            <!-- <p>{{i.description}}</p> -->
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </ng-container>
+    
+                </div>
+            </div>
+        </div>
+
+<!-- gold Member -->
+     <!-- <div class="row" *ngIf="userdata?.goldMember">   
+        <div class="col">
+
+            <div class="text-center" style="color: #c4224c;">
+                <h2>GOLD MEMBER OFFERS</h2>
+            </div>
+
+            <div style="min-height: 15em; margin: 1em" *ngIf="fetching">
+                <app-loader></app-loader>
+            </div>
+
+            <div class="row" *ngIf="!fetching">
+
+                <ng-container *ngFor="let i of offers">
+                    <div class="col" *ngIf="i.enabled && i.goldMember">
+
+                        <div class="coupon">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+
+                                    <div class="flip-card-front">
+                                        <img src='{{i.image}}' alt="" style="border-radius: 10px; width:410px; height:156px;">
+                                    </div>
+
+                                    <div class="flip-card-back">
+
+                                        <div class="dotted" id="p1" (click)="copyText(i.coupon_code)">
+                                            <h1 style="margin-bottom: 0; cursor: pointer;" data-toggle="tooltip" data-placement="auto" title="Copy To Clipboard">{{i.coupon_code}}</h1>
+                                        </div>
+
+                                        <p style="margin-bottom: 0px; font-size: 20px;">{{i.title}}</p>
+                                        <p style="margin-bottom: 0px;">{{i.subtitle}}</p>
+                                        <p style="margin-bottom: 0px;">Terms & Conditions</p>
+                                        <p>{{i.description}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+    </div> -->
+
+    <div class="text-center" style="color: #c4224c; margin-top: 30px;">
+        <h4>*T & C Apply on all offers</h4>
+    </div>
+    <br>
+    <div class='text-center'>
+        <button type='button' style="background-color: #c4224c; color: white;" class='btn' routerLink='/menu'>
+            Our Menu
+            <span class="fas fa-arrow-up"></span>
+        </button>
+    </div>
+</div>

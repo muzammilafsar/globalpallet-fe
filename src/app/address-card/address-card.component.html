@@ -1,0 +1,14 @@
+<div class="card" [ngClass]="selected ? ['border-danger','bold']:'first second'" >
+  <div class="card-body">
+    <h5 class="card-title">{{address.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{address.first_name}}</h6>
+    <p class="card-text">{{address.address}}, {{address.address2}}</p>
+    <p class="card-text">{{address.pincode}}</p>
+    <p class="card-text">{{address.state}}</p>
+    <p class="card-text">{{address.locality}}</p>
+    <div *ngIf="actions">
+      <button style="color: white; background-color: #c4224c; margin-right: 10px; border-radius: 8px;" type="button" class="btn text-center" (click)="deleteAddress(address._id)">Delete</button>
+      <button style="color: white; background-color: #c4224c; margin-left: 10px; border-radius: 8px;" type="button" class="btn text-center" (click)="editAddress(address._id);setEditMode(true)">Edit</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div id="mySidenav" class="sidenav" style="">
+  <a class="closebtn" style="border-bottom: 0px" (click)="closeNav()">&times;</a>
+
+  <a (click)="closeNav()" style="padding: 0px 0px 30px 0px; border-bottom: 0px; text-align: center;"> 
+    <img class="img-fluid" src="https://i.ibb.co/Zf099Zt/Around-the-World-2-1.png" style="height: 90px; width: 90px;">
+  </a>
+
+  <a routerLink="/menu" (click)="closeNav()">Menu</a>
+
+  <a href="#!" (click)="closeNav()" *ngIf="!loginStatus" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#LoginModalCenter">LogIn/SignUp</a>
+
+  <a href="#" *ngIf="loginStatus" routerLink="/myorders" (click)="closeNav()">My Orders</a>
+
+  <a href="#" *ngIf="loginStatus" routerLink="/myaddress" (click)="closeNav()">My Address</a>
+
+ <!-- <a routerLink="/aboutus" (click)="closeNav()">AboutUs</a> -->
+
+  <a routerLink="/contact" (click)="closeNav()">Contact</a>
+
+  <a routerLink="/offers" (click)="closeNav()">Offers</a>
+
+  <a href="#!" *ngIf="loginStatus" (click)="logout()">Logout</a>
+
+</div>
+

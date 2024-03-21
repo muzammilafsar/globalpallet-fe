@@ -1,0 +1,76 @@
+
+<!-- Container (Contact Section) -->
+<div id="contact" class="container-fluid bg-grey">
+
+    <h2 class="text-center" style="color: #c4224c;">Party/Bulk Orders</h2><br>
+
+    <div class="row">
+
+      <div class="col-sm-5">
+
+        <p>Contact Us And We Will Make All The Arrangments For You!!</p>
+        <p><span class="fas fa-map-marker-alt"></span> GTA</p>
+        <p><span class="fas fa-mobile"></span> +1 6478388372</p>
+        <p><span class="fas fa-envelope"></span> lobalpallet@gmail.com</p> 
+
+        
+          <p><button type='button' style="background-color: #c4224c; color: white;" class='btn'>
+           Call 6478388372<span class="fa fa-phone"></span></button></p>
+
+          <p><button type='button' style="background-color: #c4224c; color: white;" class='btn' routerLink='/menu'>
+            Our Menu <span class="fas fa-arrow-up"></span></button></p>
+
+      </div>
+
+      <div class="col-sm-7">
+
+        <form [formGroup]="createForm" class="create-form">
+
+        <div class="row">
+
+           <div class="col-sm-12 form-group">
+              <input class="form-control" id="event_name" placeholder="Event Type  (Birthday, Family Party...)" type="text" required #event_name>
+           </div>
+
+           <div class="col-sm-6 form-group">
+              <input class="form-control" id="amount_people" placeholder="Gathering  (20 or 100...)" type="text" required #amount_people>
+           </div> 
+
+           <div class="col-sm-6 form-group">
+            <input class="form-control" id="date" placeholder="Date of Event" type="text" required #date>
+           </div> 
+
+           <div class="col-sm-6 form-group">
+              <input class="form-control" id="name" placeholder="Your Name" type="text" required #name>
+           </div>
+
+          <div class="col-sm-6 form-group">
+             <input class="form-control" id="mobile" placeholder="Mobile Number" type="number" required #mobile>
+          </div>
+
+          <div class="col-sm-12 form-group">
+             <textarea class="form-control" id="comment" placeholder="Requirements  (Any Specefic Dishes...etc.)" rows="5" required #comment></textarea>
+          </div>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <button class="btn" type="reset" (click)= "addPartyOrders(event_name.value, amount_people.value, date.value, name.value, mobile.value, comment.value)" style="float: right; background-color: #c4224c; color: white;">Send</button>
+          </div>
+        </div>
+
+       </form>
+      </div>
+    </div>
+
+    <div class="roww">
+        <div class="col-sm-12">
+          <div id="snackbar">Sent Successfully</div>
+        </div>
+      </div>
+</div>
+
+

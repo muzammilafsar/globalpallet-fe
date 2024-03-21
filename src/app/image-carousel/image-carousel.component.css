@@ -1,0 +1,47 @@
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+/* @media (max-width:568px) { 
+  #my-carousel .item {
+      height: 120px;
+  }
+} */
+
+ /* css for button on carousel (advertisement) */
+ .hero-text {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+}
+.btn {
+  background-color: #c4224c;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2em;
+}
+
+.load {
+  top: 50%;
+  transform: translate(-0%, -0%);
+}
+
+.carousel-inner:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+@media (max-width: 412px) {
+h3 {
+  display: none; /* Hide the carousel text when the screen is less than 500 pixels wide */
+}
+p {
+display: none;
+}
+
+}

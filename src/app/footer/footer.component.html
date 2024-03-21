@@ -1,0 +1,111 @@
+<!-- Footer -->
+<footer class="page-footer font-small stylish-color-dark pt-4">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-5 mx-auto">
+
+        <!-- Content -->
+        <h5 class="font-weight-bold mt-3 mb-3">GlobalPallet Brief</h5>
+        <p style="color: gray;">GlobalPallet is an On-Demand food delivery service. 
+          We deliver various options of Food products to your doorstep, for your dining, cooked with love by us. 
+          You can order online through our <a routerLink="/app" >Apps</a> or <a routerLink="/menu" >Website</a>.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold mt-3 mb-3">Information</h5>
+
+        <ul class="list-unstyled">
+
+              <li>
+                <a href="#!" routerLink="/whyus" >Why Us ?</a>  <!-- routerLink="/whyus" --> 
+              </li>
+
+              <li>
+                <a href="#!" routerLink="/privacy" >Privacy Policy</a>  <!-- routerLink="/pp" --> 
+              </li>
+
+              <li>
+                  <a href="#!" routerLink="/terms" >Terms & Conditions</a>  <!-- routerLink="/terms" --> 
+              </li>
+
+              <li>
+                  <a href="#!" routerLink="/faq" >FAQs</a>  <!-- routerLink="/faq" --> 
+              </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold mt-3 mb-3">My Account</h5>
+
+        <ul class="list-unstyled">
+
+          <li>
+            <a href="#!" routerLink="/myorders">My Orders</a>
+          </li>
+          <li>
+            <a href="#!" routerLink="/myaddress">My Address</a>
+          </li>
+          <li>
+            <a href="#!" *ngIf="!loginStatus" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#LoginModalCenter">Login/SignUp</a>
+          </li>
+
+          <li>
+            <a href="#!" *ngIf="loginStatus" (click)="logout()">LogOut</a>
+          </li>
+
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+
+
+  <!-- Call to signup -->
+  <div *ngIf="!loginStatus">
+  <hr>
+  <ul class="list-unstyled list-inline text-center py-2">
+    <li class="list-inline-item">
+      <h5 class="mb-1">Register Now </h5>
+    </li>
+    <li class="list-inline-item">
+      <button style="background-color: #c4224c; color: white; border-radius: 0%;" class="btn" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#LoginModalCenter">LogIn</button>
+    </li>
+  </ul>
+  </div>
+  <!-- Call to signup -->
+  <hr>    
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2024 Copyright:
+    <a href="#" routerLink="/aboutus"> About Us</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<app-login-signup></app-login-signup>

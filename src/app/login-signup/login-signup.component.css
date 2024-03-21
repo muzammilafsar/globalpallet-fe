@@ -1,0 +1,9 @@
+.modal {
+  border-radius: 0px;
+}
+
+input[type=number] {
+  outline:0px !important;
+  -webkit-appearance:none !important;
+  box-shadow:none !important;
+}

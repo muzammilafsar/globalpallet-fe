@@ -1,0 +1,58 @@
+
+<div class ="load" style="min-height: 20em;" *ngIf="loading">
+  <app-loader></app-loader>
+</div>
+
+<ngx-slick-carousel *ngIf="!loading" style="width: 100%;" id="my-carousel" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+
+    <ng-container *ngFor="let image of carousels; let i = index">
+
+        <div ngxSlickItem style="outline: none !important;" *ngIf="image.enabled && image.url_2 !== ''" [ngClass]="{'active' : i == 0}" class="slide">
+          
+              <img class="item" src="{{ image.url_2 }}" alt="" width="100%">
+
+        </div>
+
+    </ng-container>
+
+</ngx-slick-carousel>
+
+<!-- <div id="demo" *ngIf="!loading" class="carousel slide" data-ride="carousel" data-wrap="true">
+
+  <ul class="carousel-indicators">
+    <ng-container *ngFor="let x of carousels;let i = index">
+      <li data-target="#demo" *ngIf="x.url_2 !== ''" [attr.data-slide-to]="i" [ngClass]="{'active' : i == 0}"></li>
+    </ng-container>
+  </ul>
+
+  <div class="carousel-inner">
+
+    <div class="carousel-item" *ngFor="let image of carousels; let i = index" [ngClass]="{'active' : i == 0}">
+
+      <ng-container *ngIf="image.url_2 !== ''">
+        <img class="d-block w-100" style="max-height: 20em;" [src]="image.url_2"  alt="First slide">
+      </ng-container>
+
+      <div class="carousel-caption">
+        <div class="hero-text">
+          <button class="btn" routerLink="/menu">Order Now</button>
+        </div>
+
+        <h3>{{image.text}}</h3>
+        <p>{{image.description}}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</div> -->

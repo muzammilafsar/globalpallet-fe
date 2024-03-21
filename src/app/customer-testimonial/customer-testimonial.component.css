@@ -1,0 +1,27 @@
+
+/* .carousel-item .row{
+    height: 200px;
+} */
+
+h4 {
+  text-align: center;
+  color: black;
+  font-size: 19px;
+  margin: 35px 0;
+  padding: 0 50px;
+}
+h3 {
+  margin: 5px 0 15px 0;
+  font-size: 1.5rem;
+  /* font-weight: bold; */
+  text-align: center;
+  color: #c4224c;;
+}
+
+/* .carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%c4224c' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+ }
+ 
+ .carousel-control-next-icon {
+   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%c4224c' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+ } */

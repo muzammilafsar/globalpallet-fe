@@ -1,0 +1,190 @@
+
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.container {
+  max-width: 1200px;
+  margin-bottom: 8px;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+.border-top-gray { border-top-color: #adb5bd; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.lh-condensed { line-height: 1.25; }
+
+
+.col-md-4 {
+position: relative;
+width: 100%;
+min-height: 1px;
+padding-right: 0px;
+padding-left: 0px;
+}
+.col-md-8 {
+position: relative;
+width: 100%;
+min-height: 1px;
+padding-right: 0px;
+padding-left: 0px;
+}
+
+p {
+margin-bottom: 0.50rem;
+}
+
+h4 {
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+h2 {
+  font-size: 2rem;
+  padding: 15px 0 15px 0;
+  margin-bottom: 0rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+
+
+.btn-lg {
+  padding: 0.5rem 0rem;
+  margin: 0px 0px 0px 0px;
+  font-size: 1.25rem;
+  line-height: 1.5;
+
+}
+
+
+select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    outline:0px !important;
+    /* -webkit-appearance:none !important; */
+    cursor: pointer;
+    box-shadow: 1px 1px #c4224c !important;
+}
+
+/* input[type=text] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+  outline:0px !important;
+  cursor: pointer;
+  box-shadow: 1px 1px #c4224c !important;
+} */
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* .input-group > .input-group-append > .btn {
+  border-radius: 0.25rem;
+} */
+
+
+.top {
+margin: auto;
+}
+
+.button {
+  color: white;
+  background-color: #c4224c;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  background-color: #c4224c;
+}
+
+.custom-control:focus,.custom-control:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+/*toast ccss*/
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #c4224c; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 100000000; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 65px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+ However, delay the fade out process for 2.5 seconds */
+ -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+ animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 65px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 65px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

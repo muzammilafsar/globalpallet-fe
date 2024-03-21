@@ -1,0 +1,64 @@
+
+.scrollmenu {
+  background-color: black; 
+  overflow: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  cursor: pointer;
+}
+
+.divv {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 5px; 
+  text-decoration: none;
+  height: 100px;
+  width: 200px;
+  text-align: center;
+      /* Add the blur effect */
+      /* filter: blur(1px);
+      -webkit-filter: blur(1px); */
+  opacity: .8;
+  background-size: cover;
+  position: relative;
+  border-radius: 8px;
+}
+
+.scrollmenu::-webkit-scrollbar {
+  display: none;
+}
+
+div.scrollmenu .divv:hover {
+  background-color: white;
+  /* filter: blur(0);
+  -webkit-filter: blur(0); */
+  opacity: 1;
+}
+
+p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* .image-container {
+  background-size: cover;
+  position: relative;
+  height: 300px;
+}
+
+.text {
+  background-color: white;
+  color: black;
+  font-size: 10vw; 
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+} */

@@ -1,0 +1,6 @@
+.row{
+  margin: 0;
+}
+.btn:hover, .btn:focus, .btn.focus {
+  color: white;
+}

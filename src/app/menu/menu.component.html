@@ -1,0 +1,641 @@
+<!-- mobile only -->
+<div class="row d-md-none d-lg-none fixed-bottom text-white" style="margin-left: 0px; margin-right: 0px;">
+
+  <div class="col text-white" style="text-align: center; padding:1em;background-color: #c4224c;cursor: pointer;" data-toggle="modal"
+    data-target="#CartModal">
+    <div id="cart-container">
+      <i class="fa" style="font-size:20px">&#xf07a;</i>
+      <span class='badge badge-warning' id='lblCartCount'>{{itemsCount}}</span>
+    </div>
+  </div>
+  <div class="col" routerLink="/checkout" style="cursor: pointer; text-align: center;padding:1em;background-color: #309def;" *ngIf="loginStatus && cartItems.length > 0">Checkout</div>
+  <div class="col" data-dismiss="modal" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#LoginModalCenter"
+    style="cursor: pointer; text-align: center;padding:1em;background-color: #309def;" *ngIf="!loginStatus && cartItems.length > 0">Checkout</div>
+  <div class="col" data-dismiss="modal" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#notAvailable"
+    style="cursor: pointer; text-align: center;padding:1em;background-color: #309def;" *ngIf="notAvailable && cartItems.length > 0">Checkout</div>
+
+</div>
+
+
+<!-- Product UI-->
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-md-8 col-sm-12" style="padding-right: 1px; padding-left: 1px;">
+
+      <div style="min-height: 15em" *ngIf="fetching">
+        <app-loader *ngIf="fetching"></app-loader>
+      </div>
+
+      <div class="container" *ngIf="!fetching">
+
+        <div class="row">
+
+          <!---search bar (desktop view)-->
+          <div class="col-sm-12 sticky-top" style="padding: 2px 0 0 0;">
+
+            <form>
+              <input type="text" [(ngModel)]="searchText" name="search" placeholder="Search...">
+              <!-- <input type="reset" value="Reset"> -->
+            </form>
+
+          </div>
+
+          <div class="col" *ngIf="searchText == ''">
+
+            <mat-tab-group [selectedIndex]="selectedtab">
+
+              <ng-container *ngFor="let cat of category">
+
+                <mat-tab [label]="cat.segment" *ngIf="cat.enable">
+                  <!--- cat.name-->
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <ng-container *ngFor="let item of products | productFilter:cat.key">
+
+                        <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="item.status" style="padding-top: 0.5em;padding-bottom: 0.5em;">
+                          <div class="card">
+                            <div class="row">
+                              <div class="col-md-12">
+
+                                <!-- on hover blurr effect for text (product image)-->
+
+                                <div class="row" *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 )">
+                                  <div class="col-md-12 textWithBlurredBg">
+                                    <img id="myImg" (click)="setProduct(item._id)" style="object-fit: cover; width: 100%; height: 240px; padding: 0.4em 0.4em 0.4em 0.4em; border-radius: 8px;"
+                                      class="img-fluid" src={{item.image}} alt="{{item.name}}">
+                                    <h4>See Details</h4>
+                                  </div>
+                                </div>
+
+                                <div class="row" *ngIf="!(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 )">
+                                  <div class="col-md-12 textWithBlurredBg">
+                                    <img id="myImg" (click)="setProduct(item._id)" style="object-fit: cover; width: 100%; height: 240px; padding: 0.4em 0.4em 0.4em 0.4em; border-radius: 8px;"
+                                      class="img-fluid" src={{item.image}} alt="snow">
+                                    <h4>Out Of Stock</h4>
+                                  </div>
+                                </div>
+                                <!--blurr effect ends here  -->
+
+
+                                <!-- item Name and veg non-veg symbol and chilly indicator -->
+
+                                <div class="row">
+
+                                  <div class="col-8" style="padding: 0em 0.5em 0 1em">
+                                    <div style="padding: 0.2em 0.5em 0.5em 0.5em ">
+                                      <p style="font-size: 16px; margin-bottom: 0;"><strong>{{item.name}}</strong></p>
+                                    </div>
+                                  </div>
+
+                                  <!-- chilli indicator -->
+
+                                  <!-- <div class="col" style="padding: 0.5em 0em 0em 0em" *ngIf="item.chilly_level === 1">
+                                  <div style="padding: 0;">
+                                    <img class="img-fluid" src="src/assets/chilly-1.png" style="float: right; height: 22.5px; width: 82px">
+                                  </div>
+                                </div>
+
+                                <div class="col" style="padding: 0.5em 0em 0em 0em" *ngIf="item.chilly_level === 2">
+                                  <div style="padding: 0;">
+                                    <img class="img-fluid" src="src/assets/chilly-2.png" style="float: right; height: 22.5px; width: 82px">
+                                  </div>
+                                </div>
+
+                                <div class="col" style="padding: 0.5em 0em 0em 0em" *ngIf="item.chilly_level === 3">
+                                  <div style="padding: 0;">
+                                    <img class="img-fluid" src="src/assets/chilly-3.png" style="float: right; height: 22.5px; width: 82px">
+                                  </div>
+                                </div> -->
+
+                                  <!-- chilli ends here -->
+
+                                  <div class="col-4" style="padding: 0em 1.2em 0 0.5em" *ngIf="!item.veg">
+                                    <div style="padding: 0;">
+                                      <img class="img-fluid" src="https://img.icons8.com/color/48/000000/non-vegetarian-food-symbol.png" style="float: right; height: 36px; width: 36px;">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-4" style="padding: 0em 1.2em 0 0.5em" *ngIf="item.veg">
+                                    <div style="padding: 0;">
+                                      <img class="img-fluid" src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" style="float: right; height: 36px; width: 36px;">
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                                <!-- name and veg symbol ends here -->
+
+
+                                <!-- price of item and button for 'Add to cart' -->
+
+                                <form [formGroup]="item.form">
+                                  <div class="row">
+                                    <div class="col-7" style="padding: 0em 0.2em 0 1em">
+                                      <div style="padding: 0em 0.5em 0 0.5em">
+                                        <div style="margin: .5em 0 .5em 0">
+
+                                          <div class="panel-body text-center" [id]="item._id + 'menu'">
+                                            <p class="lead" style="padding-top: 5px; margin-bottom: .5em; font-size:15px; float: left; font-weight: bold;" *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 && !(item.coming_soon))">
+                                              <strong>₹{{item.price_1}} ({{item.size_1}})</strong>
+                                            </p>
+                                          </div>
+
+                                          <div class="panel-body text-center" [id]="item._id + 'menu'">
+                                            <p class="lead" style="margin-bottom: 0;" *ngIf="!(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 )">
+                                              <img class="img-fluid" src="/assets/outofstock.png"
+                                                style="float: left; height: 30px; width: 100px">
+                                            </p>
+                                          </div>
+
+                                          <div class="panel-body text-center" [id]="item._id + 'menu'">
+                                            <p class="lead" style="margin-bottom: 0;" *ngIf="item.coming_soon">
+                                              <img class="img-fluid" src="/assets/coming_soon.png"
+                                                style="float: left; height: 30px; width: 100px">
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-5" style="padding-left: 0">
+                                      <div style="text-align: end; padding: 0.5em 0.5em 0.5em 0.2em">
+
+                                        <button *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 && !(item.coming_soon))" style="color: white; background-color: #c4224c; width: 90%; border-radius: 8px; letter-spacing: 1px;"
+                                          type="button" class="btn btn-sm text-center" (click)="addtoCart(item,item.form.value)"><strong>ADD</strong></button>
+
+                                        <button disabled *ngIf="!(item.size_1 && item.size_1 !== '' && item.qty_1 > 0)" style="color: white; background-color: #c4224c; width: 90%; border-radius: 8px; letter-spacing: 1px;"
+                                          type="button" class="btn btn-sm text-center"><strong>ADD</strong></button>
+
+                                        <button disabled *ngIf="item.coming_soon" style="color: white; background-color: #c4224c; width: 90%; border-radius: 8px; letter-spacing: 1px;"
+                                          type="button" class="btn btn-sm text-center"><strong>SOON</strong></button>
+
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </form>
+                                <!-- price and Add button ends here -->
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+
+                </mat-tab>
+
+              </ng-container>
+
+            </mat-tab-group>
+          </div>
+
+          <!--- search results view-->
+          <div class="col" *ngIf="searchText !== ''">
+            <div class="container-fluid">
+              <div class="row">
+                <ng-container *ngFor="let item of products | search:searchText">
+                  <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="item.status" style="padding-top: 0.5em;padding-bottom: 0.5em;">
+                    <div class="card">
+                      <div class="row">
+                        <div class="col-md-12">
+
+                          <!-- on hover -->
+
+                          <div class="row" *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 )">
+                            <div class="col-md-12 textWithBlurredBg">
+                              <img id="myImg" (click)="setProduct(item._id)" style="object-fit: cover; width: 100%; height: 240px; padding: 0.4em 0.4em 0.4em 0.4em; border-radius: 8px;"
+                                class="img-fluid" src={{item.image}} alt="{{item.name}}">
+                              <h4>See Details</h4>
+                            </div>
+                          </div>
+
+                          <div class="row" *ngIf="!(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 )">
+                            <div class="col-md-12 textWithBlurredBg">
+                              <img id="myImg" (click)="setProduct(item._id)" style="object-fit: cover; width: 100%; height: 240px; padding: 0.4em 0.4em 0.4em 0.4em; border-radius: 8px;"
+                                class="img-fluid" src={{item.image}} alt="snow">
+                              <h4>Out Of Stock</h4>
+                            </div>
+                          </div>
+
+                          <div class="row">
+
+                              <div class="col-8" style="padding: 0em 0.5em 0 1em">
+                                <div style="padding: 0.2em 0.5em 0.5em 0.5em ">
+                                  <p style="font-size: 16px; margin-bottom: 0;"><strong>{{item.name}}</strong></p>
+                                </div>
+                              </div>
+
+                              <div class="col-4" style="padding: 0em 1.2em 0 0.5em" *ngIf="!item.veg">
+                                <div style="padding: 0;">
+                                  <img class="img-fluid" src="https://img.icons8.com/color/48/000000/non-vegetarian-food-symbol.png" style="float: right; height: 36px; width: 36px;">
+                                </div>
+                              </div>
+
+                              <div class="col-4" style="padding: 0em 1.2em 0 0.5em" *ngIf="item.veg">
+                                <div style="padding: 0;">
+                                  <img class="img-fluid" src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" style="float: right; height: 36px; width: 36px;">
+                                </div>
+                              </div>
+
+                            </div>
+
+                          <form [formGroup]="item.form">
+                            <div class="row">
+                              <div class="col-7" style="padding: 0 0.2em 0 1em;">
+                                <div style="padding: 0em 0.5em 0 0.5em">
+                                  <div style="margin: .5em 0 .5em 0">
+
+                                    <div class="panel-body text-center" [id]="item._id + 'menu'">
+                                      <p class="lead" style="padding-top: 5px; margin-bottom: .5em; font-size:15px; float: left; font-weight: bold;" *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 && !(item.coming_soon))">
+                                        <strong>₹{{item.price_1}} ({{item.size_1}})</strong>
+                                      </p>
+                                    </div>
+
+                                    <div class="panel-body text-center" [id]="item._id + 'menu'">
+                                      <p class="lead" style="margin: 0;font-size:15px; font-weight: bold;" *ngIf="!(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 )">
+                                        <img class="img-fluid" src="/assets/outofstock.png"
+                                          style="float: left; height: 30px; width: 100px">
+                                        <!-- <strong style="color: #c4224c">Out Of Stock</strong> -->
+                                      </p>
+                                    </div>
+
+                                    <div class="panel-body text-center" [id]="item._id + 'menu'">
+                                      <p class="lead" style="margin: 0;font-size:15px; font-weight: bold;" *ngIf="item.coming_soon">
+                                        <img class="img-fluid" src="/assets/coming_soon.png"
+                                          style="float: left; height: 30px; width: 100px">
+                                        <!-- <strong style="color: #c4224c">Coming Soon</strong> -->
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-5" style="padding-left: 0">
+                                <div style="text-align: end; padding: 0.5em 0.5em 0.5em 0.2em">
+
+                                  <button *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 && !(item.coming_soon))" style="color: white; background-color: #c4224c; width: 95%; border-radius: 8px; letter-spacing: 1px;"
+                                    type="button" class="btn btn-sm text-center" (click)="addtoCart(item,item.form.value)"><strong>ADD</strong></button>
+
+                                  <button disabled *ngIf="!(item.size_1 && item.size_1 !== '' && item.qty_1 > 0)" style="color: white; background-color: #c4224c; width: 95%; border-radius: 8px; letter-spacing: 1px;"
+                                    type="button" class="btn btn-sm text-center"><strong>ADD</strong></button>
+
+                                  <button disabled *ngIf="item.coming_soon" style="color: white; background-color: #c4224c; width: 95%; border-radius: 8px; letter-spacing: 1px;"
+                                    type="button" class="btn btn-sm text-center"><strong>SOON</strong></button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <div class="col-md-6" *ngIf=" (products | search:searchText).length === 0" style="padding-top: 0.5em;padding-bottom: 0.5em;">
+                  <div class="text-center">
+                    <div class="row">
+                      <div class="col">
+                        <span style="font-size: 1.5em;"> No Products Found !!</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- Right Checkout -->
+    <div class="col-md-4 col-sm-12 d-none d-md-block" style="margin: 2px 0 0 0; padding-left: 5px; padding-right: 12px; float: right;">
+      <div class="card d-none d-sm-block stickyM" style="border-radius: 8px; border-top: none;">
+        <div class="container" style=" padding-left: 14px; padding-right: 14px;">
+          <div class="row" style="padding: 12px; background-color:#c4224c; color: white; border-radius: 8px;">
+            <div class="col">
+              <span>
+                <h5 style="margin-bottom: 0; font-size: 1.35rem;">Your Cart
+                  <i class="fas fa-shopping-cart" style="float: right;"></i>
+                </h5>
+              </span>
+            </div>
+          </div>
+          <ng-container *ngIf="cartItems.length > 0">
+            <div class="row">
+              <div class="col no_padding">
+                <div>
+                  <div class="row">
+                    <div class="col-md-12 card_padding" *ngFor="let item of cartItems">
+                      <div class="card" style="padding: 8px;">
+                        <div class="row">
+                          <div class="col-md-5" style="padding: 0 10px 0 15px">{{item.product.name}}</div>
+                          <div class="col-md-4" style="padding: 0 10px 0 10px">
+                            <div>
+                              <div class="row text-center">
+                                <div class="col-md-4 no-padding">
+                                  <button class="btn btn-sm" (click)="decrement(item)">
+                                    <i class="fas fa-minus" style="color: #c4224c"></i>
+                                  </button>
+                                </div>
+                                <div class="col-md-4 no-padding">
+                                  <div style="width: 100%;">{{item.quantity}}</div>
+                                </div>
+                                <div class="col-md-4 no-padding">
+                                  <button class="btn btn-sm" [disabled]="item.quantity >= item.qty_avail" (click)="increment(item)">
+                                    <i class="fas fa-plus" style="color: #c4224c"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-3 text-center" style="padding: 0 5px 0 6px">₹{{item.price * item.quantity}}</div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="row" style="padding-bottom: 160px;"></div>
+                    <div class="col-md-12 card_padding">
+                      <div class="card" style="padding: 8px;font-size: 13px;">
+                        <div class="row">
+                          <div class="col">
+                            <div>
+                              <span>Sub Total</span>
+                              <span class="float-right">₹{{getTotal}}</span>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div>
+
+                              <span>Delivery Charges</span>
+                              <span class="float-right">₹{{deliveryCharges}}</span>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 card_padding" style="padding-bottom: 5px;">
+                      <div class="card" style="padding: 8px;font-size: 13px;">
+                        <div class="row">
+                          <div class="col">
+                            <div style="font-weight: bold;">
+                              <span>Total</span>
+                              <span class="float-right">₹{{ getTotal + deliveryCharges}}</span>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" data-dismiss="modal" style="letter-spacing: 1px; font-weight: bold; border-radius: 8px; cursor: pointer; padding: 0.5em;background-color:#c4224c; color: white;"
+              routerLink="/checkout" *ngIf="loginStatus && cartItems.length > 0">
+              <div class="col text-center">
+                <span>Proceed to Checkout</span>
+              </div>
+            </div>
+            <div class="row" style="letter-spacing: 1px; font-weight: bold; border-radius: 8px; padding: 0.5em;background-color:#c4224c; color: white;"
+              data-dismiss="modal" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#LoginModalCenter"
+              *ngIf="!loginStatus && cartItems.length > 0">
+              <div class="col text-center">
+                <span>Proceed to Checkout</span>
+              </div>
+            </div>
+            <div class="row" style="letter-spacing: 1px; font-weight: bold; border-radius: 8px; padding: 0.5em;background-color:#c4224c; color: white;"
+              data-dismiss="modal" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#notAvailable"
+              *ngIf="notAvailable && cartItems.length > 0">
+              <div class="col text-center">
+                <span>Proceed to Checkout</span>
+              </div>
+            </div>
+          </ng-container>
+          <div *ngIf="(cartItems.length == 0)" style="min-height: 8em; margin: 10em 0 2em 0; text-align: center">
+            <h5>Your cart is empty :(</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- The Modal for Product Description-->
+<div class="modall modal" id="myModal" style="text-align: center;">
+  <span class="closee" data-dismiss="modal">&times;</span>
+  <div class="modal-contentt">
+
+    <!-- Modal Header -->
+    <div class="modal-header" style="padding: 2px 10px 2px 10px;">
+      <h4 class="modal-title" style="color: #ccc;">{{selectedItem['name']}}</h4>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body" style="text-align: center;">
+      <img class="img-fluid" src="{{selectedItem['image']}}">
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <h6 class="text-center" id="caption">
+        {{selectedItem['description']}}
+      </h6>
+    </div>
+
+  </div>
+</div>
+
+<!-- The Modal for Cart Limit -->
+<div class="modal fade" id="cartlimit">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="padding: 2px 10px 2px 10px;">
+        <h4 class="modal-title">Cart Limit Exceeded</h4>
+        <button type="button" class="close" data-dismiss="modal" style="padding: 24px 20px 5px 5px;">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="padding: 2rem;">
+        <p>Cart Limit Exceeded, you can order only certain amount of products in a single order. In case you have bulk order
+          reach us at our party orders page.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Cart modal in mobile -->
+<div class="modal fade" id="CartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="border: 0px; border-radius: 8px;">
+      <div class="modal-header" style="border-radius: 8px 8px 0px 0px; border-bottom: 0; padding: 0.5em; background-color:#c4224c;color: white;">
+        <h5 class="modal-title" style="padding-left: 10px;" id="exampleModalCenterTitle">Your Cart</h5>
+        <button type="button" class="close" style="padding: 18px;" data-dismiss="modal" aria-label="Close">
+          <span style="color: white !important;" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 0rem;">
+        <div class="card" style="border: 0px">
+          <div class="container">
+            <ng-container *ngIf="cartItems.length > 0">
+              <div class="row">
+                <div class="col no_padding">
+                  <div>
+                    <div class="row">
+                      <div class="col-md-12 card_padding" *ngFor="let item of cartItems">
+                        <div class="card" style="padding: 8px;">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <div class="row">
+                                <div class="col-sm-12">{{item.product.name}}</div>
+                              </div>
+                              <div class="row">
+
+                                <div class="col" style=" text-align: left;">
+                                  <button class="btn btn-sm" (click)="decrement(item)">
+                                    <i class="fas fa-minus" style="color: #c4224c"></i>
+                                  </button>
+                                </div>
+                                <div class="col">
+                                  <div style="text-align: center; width: 100%;">{{item.quantity}}</div>
+                                </div>
+                                <div class="col" style=" text-align: right;">
+                                  <button class="btn btn-sm" [disabled]="item.quantity >= item.qty_avail" (click)="increment(item)">
+                                    <i class="fas fa-plus" style="color: #c4224c;"></i>
+                                  </button>
+                                </div>
+                                <div class="col">
+                                  <div class="col-md-3 text-center">₹{{item.price * item.quantity}}</div>
+                                </div>
+
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <div class="row" style="padding-bottom: 150px;"></div>
+                      <div class="col-md-12 card_padding">
+                        <div class="card" style="padding: 8px;font-size: 13px;">
+                          <div class="row">
+                            <div class="col">
+                              <div>
+                                <span>Sub Total</span>
+                                <span class="float-right">₹{{getTotal}}</span>
+
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div>
+
+                                <span>Delivery Charges</span>
+                                <span class="float-right">₹{{deliveryCharges}}</span>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 card_padding" style="padding-bottom: 5px;">
+                        <div class="card" style="padding: 8px;font-size: 13px;">
+                          <div class="row">
+                            <div class="col">
+                              <div style="font-weight: bold;">
+                                <span>Total</span>
+                                <span class="float-right">₹{{ getTotal + deliveryCharges}}</span>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div *ngIf="(cartItems.length == 0)" style="min-height: 6em; margin: 4em 0 0em 0; text-align: center">
+              <h5>Your cart is empty :(</h5>
+            </div>
+            <div class="row" data-dismiss="modal" style="letter-spacing: 1px; font-weight: bold; border-radius: 0px 0px 8px 8px; padding: 0.5em;background-color:#c4224c; color: white; cursor: pointer;"
+              *ngIf="loginStatus && !notAvailable && cartItems.length > 0" routerLink="/checkout">
+              <div class="col text-center">
+                <span>Proceed to Checkout</span>
+              </div>
+            </div>
+            <div class="row" data-dismiss="modal" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#LoginModalCenter"
+              style="letter-spacing: 1px; font-weight: bold; border-radius: 0px 0px 8px 8px; padding: 0.5em;background-color:#c4224c; color: white; cursor: pointer;"
+              *ngIf="!loginStatus && cartItems.length > 0">
+              <div class="col text-center">
+                <span>Proceed to Checkout</span>
+              </div>
+            </div>
+            <div class="row" data-dismiss="modal" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#notAvailable"
+              style="letter-spacing: 1px; font-weight: bold; border-radius: 0px 0px 8px 8px; padding: 0.5em;background-color:#c4224c; color: white; cursor: pointer;"
+              *ngIf="notAvailable && cartItems.length > 0">
+              <div class="col text-center">
+                <span>Proceed to Checkout</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Modal -->
+  <div class="modal fade" id="outofstock" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Oh Nooo! :( </h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <p>It seems some of the item/s in your cart has been out of stock.</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+<app-not-available *ngIf="notAvailable"></app-not-available>
+<div class="roww">
+  <div class="col-sm-12">
+    <div id="snackbar">{{toastMsg}}</div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+
+<!-- Container (Contact Section) -->
+<div id="contact" class="container-fluid bg-grey">
+    <h2 class="text-center" style="color: #c4224c;">CONTACT</h2><br><br>
+    <div class="row">
+      <div class="col-sm-5">
+        <p>Contact us and we'll get back to you ASAP.</p>
+        <p><span class="fas fa-map-marker-alt"></span> GTA</p>
+        <p><span class="fas fa-mobile"></span> +1 6478388372</p>
+        <p><span class="fas fa-envelope"></span> support@globalpallet.com</p>
+      </div>
+      <div class="col-sm-7">
+        <form [formGroup]="createForm" class="create-form">
+        <div class="row">
+
+             <div class="col-sm-6 form-group">
+                <input class="form-control" id="Order_id" placeholder="Email ID (Optional)" type="email" required #Order_id>
+              </div>
+
+              <div class="col-sm-6 form-group">
+                  <input class="form-control" id="subject" placeholder="Subject" type="text" required #subject>
+                </div> 
+
+          <div class="col-sm-6 form-group">
+            <input class="form-control" id="name" placeholder="Your Name" type="text" required #name>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <input class="form-control" id="mobile" placeholder="Mobile Number" type="number" required #mobile>
+          </div>
+
+          <div class="col-sm-12 form-group">
+              <textarea class="form-control" id="comment" placeholder="Comments" rows="5" required #comment></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <button class="btn" type="reset" (click)= "addIssues(Order_id.value, subject.value, name.value, mobile.value, comment.value)" style="float: right; background-color: #c4224c; color: white;">Send</button>
+          </div>
+        </div>
+
+       </form>
+      </div>
+    </div>
+
+    <div class='text-center'><button type='button' style="background-color: #c4224c; color: white;" class='btn' routerLink='/menu'>
+      Our Menu <span class="fas fa-arrow-up"></span></button></div>
+    </div>
+
+  <div class="roww">
+    <div class="col-sm-12">
+      <div id="snackbar">Sent Successfully</div>
+    </div>
+  </div>
+
+  <!-- Add Google Maps -->
+ <!--- <div id="googleMap" style="height:400px;width:100%;"></div> --->
+

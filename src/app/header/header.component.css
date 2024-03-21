@@ -1,0 +1,147 @@
+
+.nav-item > a{
+    padding: 11px 11px 11px 11px;
+}
+
+.navbar {
+    /* overflow: hidden;  */
+    font-size: 20px;
+    background-color: #c4224c;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+}
+
+.navbar-brand {
+  font-size: 22px;
+  color: white;
+}
+
+/* .dropdown-menu {
+  position: absolute;
+  top: 80%;
+  left: 14px; comment this
+  font-size: 1.25rem;
+  padding: 0;
+  border-radius: 0;
+  z-index: 2000;
+
+  display: none;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+} */
+
+/* .dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.2rem 1.1rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.dropdown-divider {
+  height: 0;
+  margin: 0.1rem 0;
+  overflow: hidden;
+  border-top: 1px solid #e9ecef;
+} */
+
+
+@media (min-width: 768px){
+  .container {
+      max-width: 1350px;
+  }
+  }
+
+  /* @media (min-width: 1200px){
+    .container {
+        min-width: 1250px;
+    }
+    } */
+
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+
+/* .navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+} */
+
+.dropdown .dropbtn {
+  font-size: 18px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 12px 14px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  top: 100%;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 2000;
+  cursor: pointer;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.form-check-inline {
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+
+.zoom {
+  transition: transform .2s;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.15); /* IE 9 */
+  -webkit-transform: scale(1.15); /* Safari 3-8 */
+  transform: scale(1.15); 
+}
