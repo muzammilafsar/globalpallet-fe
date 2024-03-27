@@ -20,11 +20,11 @@
           <h6 class="my-0">{{item.product.name }} x {{item.quantity}}</h6>
           <small class="text-muted">{{item.product.description}}</small>
         </div>
-        <span class="text-muted">₹{{item.price * item.quantity}}/-</span>
+        <span class="text-muted">${{item.price * item.quantity}}/-</span>
       </li>
       <li class="list-group-item d-flex justify-content-between">
           <span>Delivery Charges</span>
-          <span class="float-right">₹{{deliveryCharges()}}/-</span>
+          <span class="float-right">${{deliveryCharges()}}/-</span>
       </li>
 
       <li *ngIf="couponSucess" class="list-group-item d-flex justify-content-between bg-light">
@@ -32,7 +32,7 @@
           <h6 class="my-0">Promo Code</h6>
           <small><strong>{{appliedCoupon?.code}}</strong></small>
         </div>
-        <span class="text-success" *ngIf = "discountcpn !== 0">- ₹{{discountcpn}}/-</span>
+        <span class="text-success" *ngIf = "discountcpn !== 0">- ${{discountcpn}}/-</span>
         <span class="text-success" *ngIf = "discountcpn === 0">{{couponmsg}}</span>
       </li>
 
@@ -40,14 +40,14 @@
         <span *ngIf = "!theCheckbox">Total (INR)</span>
         <span *ngIf = "theCheckbox" style="color: green">Now You Pay</span>
         
-        <strong *ngIf = "!theCheckbox">₹{{cartTotal()}}/-</strong>
+        <strong *ngIf = "!theCheckbox">${{cartTotal()}}/-</strong>
 
         <div *ngIf = "theCheckbox && wallBal?.userData?.wallet_balance <= cartTotal()">
-            <strong class="text-muted">₹{{cartTotal()}}&nbsp; - &nbsp;₹{{wallBal?.userData?.wallet_balance}}&nbsp; = &nbsp;<strong style="color: black">₹{{walletUsedTotal()}}/- </strong></strong>
+            <strong class="text-muted">${{cartTotal()}}&nbsp; - &nbsp;${{wallBal?.userData?.wallet_balance}}&nbsp; = &nbsp;<strong style="color: black">${{walletUsedTotal()}}/- </strong></strong>
         </div>
 
         <div *ngIf = "theCheckbox && wallBal?.userData?.wallet_balance > cartTotal()">
-          <strong class="text-muted">₹{{wallBal?.userData?.wallet_balance}}&nbsp; - &nbsp;₹{{cartTotal()}}&nbsp; = &nbsp;<strong style="color: black">₹{{walletUsedTotal()}}/- </strong></strong>
+          <strong class="text-muted">${{wallBal?.userData?.wallet_balance}}&nbsp; - &nbsp;${{cartTotal()}}&nbsp; = &nbsp;<strong style="color: black">${{walletUsedTotal()}}/- </strong></strong>
         </div>
       </li>
 

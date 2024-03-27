@@ -139,7 +139,7 @@
 
                                           <div class="panel-body text-center" [id]="item._id + 'menu'">
                                             <p class="lead" style="padding-top: 5px; margin-bottom: .5em; font-size:15px; float: left; font-weight: bold;" *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 && !(item.coming_soon))">
-                                              <strong>₹{{item.price_1}} ({{item.size_1}})</strong>
+                                              <strong>${{item.price_1}} ({{item.size_1}})</strong>
                                             </p>
                                           </div>
 
@@ -252,7 +252,7 @@
 
                                     <div class="panel-body text-center" [id]="item._id + 'menu'">
                                       <p class="lead" style="padding-top: 5px; margin-bottom: .5em; font-size:15px; float: left; font-weight: bold;" *ngIf="(item.size_1 && item.size_1 !== '' && item.qty_1 > 0 && !(item.coming_soon))">
-                                        <strong>₹{{item.price_1}} ({{item.size_1}})</strong>
+                                        <strong>${{item.price_1}} ({{item.size_1}})</strong>
                                       </p>
                                     </div>
 
@@ -354,7 +354,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-3 text-center" style="padding: 0 5px 0 6px">₹{{item.price * item.quantity}}</div>
+                          <div class="col-md-3 text-center" style="padding: 0 5px 0 6px">${{item.price * item.quantity}}</div>
 
                         </div>
 
@@ -368,7 +368,7 @@
                           <div class="col">
                             <div>
                               <span>Sub Total</span>
-                              <span class="float-right">₹{{getTotal}}</span>
+                              <span class="float-right">${{getTotal}}</span>
 
                             </div>
                           </div>
@@ -378,7 +378,7 @@
                             <div>
 
                               <span>Delivery Charges</span>
-                              <span class="float-right">₹{{deliveryCharges}}</span>
+                              <span class="float-right">${{deliveryCharges}}</span>
 
                             </div>
                           </div>
@@ -391,7 +391,7 @@
                           <div class="col">
                             <div style="font-weight: bold;">
                               <span>Total</span>
-                              <span class="float-right">₹{{ getTotal + deliveryCharges}}</span>
+                              <span class="float-right">${{ getTotal + deliveryCharges}}</span>
 
                             </div>
                           </div>
@@ -520,7 +520,7 @@
                                   </button>
                                 </div>
                                 <div class="col">
-                                  <div class="col-md-3 text-center">₹{{item.price * item.quantity}}</div>
+                                  <div class="col-md-3 text-center">${{item.price * item.quantity}}</div>
                                 </div>
 
                               </div>
@@ -538,7 +538,7 @@
                             <div class="col">
                               <div>
                                 <span>Sub Total</span>
-                                <span class="float-right">₹{{getTotal}}</span>
+                                <span class="float-right">${{getTotal}}</span>
 
                               </div>
                             </div>
@@ -548,7 +548,7 @@
                               <div>
 
                                 <span>Delivery Charges</span>
-                                <span class="float-right">₹{{deliveryCharges}}</span>
+                                <span class="float-right">${{deliveryCharges}}</span>
 
                               </div>
                             </div>
@@ -561,7 +561,7 @@
                             <div class="col">
                               <div style="font-weight: bold;">
                                 <span>Total</span>
-                                <span class="float-right">₹{{ getTotal + deliveryCharges}}</span>
+                                <span class="float-right">${{ getTotal + deliveryCharges}}</span>
 
                               </div>
                             </div>

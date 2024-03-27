@@ -27,7 +27,7 @@
             <li class="grey">{{item.order_date | date : "dd.MM.y / hh:mm:ss a"}}</li>
             <li><b style="color: #c4224c"> Item/s: {{item.items.length}} </b></li>
             <!--  <li *ngFor = "let i of order.items">Item/s: {{i.product.name}} x {{i.quantity}}</li>    -->
-            <li><b style="color: black;"> Total: ₹{{item.total_price}}/- </b></li>
+            <li><b style="color: black;"> Total: ${{item.total_price}}/- </b></li>
             <li><b style="color: green;"> Status: {{(item.order_completed)? 'Completed' : (item.order_cancelled)? 'Cancelled' :'Processing'}} </b></li>
 
             <div class="grey">
@@ -69,7 +69,7 @@
 
               <!-- <li *ngFor = "let i of order.items">Item/s: {{i.product.name}} x {{i.quantity}}</li>    -->
                 <div class="col-sm-4">
-                  <li> <b>Total: ₹{{item.total_price}}/- </b></li>
+                  <li> <b>Total: ${{item.total_price}}/- </b></li>
                 </div>
 
                 <div class="col-sm-4"> 
@@ -137,7 +137,7 @@
             <li class="grey">{{order.order_date | date : "dd.MM.y / hh:mm:ss a"}}</li>
             <li>Item/s: {{order.items.length}}</li>
             <!-- <li *ngFor = "let i of order.items">Item/s: {{i.product.name}} x {{i.quantity}}</li>    -->
-            <li>Total: ₹{{order.total_price}}/-</li>
+            <li>Total: ${{order.total_price}}/-</li>
             <li>Status: {{(order.order_completed)? 'Completed' : (order.order_cancelled)? 'Cancelled' :'Processing'}}</li>
 
             <div class="grey">
@@ -182,7 +182,7 @@
             <ul class="price">
               <li class="header" style="border-radius: 8px 8px 0px 0px;">Order Id:{{selectedOrderId}}</li>
               <li class="grey" *ngFor="let i of selecteditems">{{i.product.name}} x {{i.quantity}}</li>
-              <li class="header" style="border-radius: 0px 0px 8px 8px; font-size: 20px;">Total: ₹{{selectedOrderTotal}}</li>
+              <li class="header" style="border-radius: 0px 0px 8px 8px; font-size: 20px;">Total: ${{selectedOrderTotal}}</li>
             </ul>
 
             <p style="font-size: 14px;">NOTE: The order can only be valid for cancellation if cancellation request has been placed under 30 minutes after

@@ -257,7 +257,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
         this.api.post(serviceUrl.applyCoupon, { code: this.couponForm.value.coupon, total: this.cart.subTotal() }).subscribe(val => {
           if (val && val['status'] && val['status'] === 200) {
             if (this.cart.CarttotalAmount() < val['coupon']['min_order_value']) {
-              this.couponErrorMsg = `Valid Only On Min. Order Of ₹${val['coupon']['min_order_value']}`;
+              this.couponErrorMsg = `Valid Only On Min. Order Of $${val['coupon']['min_order_value']}`;
             }
             else {
               // Price Off Coupon
