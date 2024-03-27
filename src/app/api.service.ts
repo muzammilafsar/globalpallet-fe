@@ -7,8 +7,8 @@ import { LoginService } from './login.service';
 })
 export class ApiService {
   confirmedOrder = null;
-   baseUrl = 'http://localhost:3000';
-  // baseUrl = 'https://foodrill-be.onrender.com'; 
+  //  baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://globalpallet-be.onrender.com'; 
 
   allCatWithSubCat = [];
   productDesction = {};
