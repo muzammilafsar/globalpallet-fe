@@ -291,7 +291,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     if (this.addressForm.valid) {
       this.disabledOrder = true;
       this.api.post(serviceUrl.newOrder, {
-        userip: this.ipaddress.ip,
+        userip: this.ipaddress && this.ipaddress.ip,
         device: this.devicemsg,
         instruction: this.instructForm.value.instructions,
         address: this.addressForm.value,
